@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Heart with Text on Canvas</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="300" height="300"></canvas>
+
+<script>
+const canvas = document.getElementById('myCanvas');
+const ctx = canvas.getContext('2d');
+
+// Function to draw a heart shape
+function drawHeart(x, y, width, height) {
+  ctx.beginPath();
+  const topCurveHeight = height * 0.3;
+  ctx.moveTo(x, y + topCurveHeight);
+  // Left curve
+  ctx.bezierCurveTo(
+    x, y, 
+    x - width / 2, y, 
+    x - width / 2, y + topCurveHeight
+  );
+  // Bottom left curve
+  ctx.bezierCurveTo(
+    x - width / 2, y + (height + topCurveHeight) / 2, 
+    x, y + (height + topCurveHeight) / 2, 
+    x, y + height
+  );
+  // Bottom right curve
+  ctx.bezierCurveTo(
+    x, y + (height + topCurveHeight) / 2, 
+    x + width / 2, y + (height + topCurveHeight) / 2, 
+    x + width / 2, y + topCurveHeight
+  );
+  // Right curve
+  ctx.bezierCurveTo(
+    x + width / 2, y, 
+    x, y, 
+    x, y + topCurveHeight
+  );
+  ctx.closePath();
+  ctx.fillStyle = 'red';
+  ctx.fill();
+}
+
+// Function to add text inside the heart
+function addTextToHeart(text) {
+  ctx.font = '20px Arial'; // Adjust font size and style as needed
+  ctx.fillStyle = 'white';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(text, 150, 150); // Center the text within the heart
+}
+
+// Draw the heart
+drawHeart(150, 150, 100, 100);
+
+// Add text inside the heart
+addTextToHeart('Love'); 
+</script>
+
+</body>
+</html>
